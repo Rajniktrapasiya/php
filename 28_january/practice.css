@@ -1,0 +1,19 @@
+.account-details{
+    height: 250px; 
+    width: 100%;
+    margin-top: 10px;
+    border: 2px solid black;
+}
+.account-addressInformation{
+    height: 250px; 
+    width: 100%;
+    margin-top: 10px;
+    border: 2px solid black;
+}
+.account-otherInformation{
+    display: none;
+    height: 530px; 
+    width: 100%;
+    margin-top: 10px;
+    border: 2px solid black;
+}
