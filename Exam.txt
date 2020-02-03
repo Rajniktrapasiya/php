@@ -1,0 +1,6 @@
+Array Difference :-
+
+Defination :- array difference means diffrential values beetween two arrays.(IN PHP)
+
+predifinde function(In PHP):- array_intersect($arr1,$arr2,(optional)boolean);
+ - it's return all matches value both in array.
