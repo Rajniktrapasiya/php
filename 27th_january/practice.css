@@ -1,3 +1,6 @@
+.error{
+    color: rgb(255, 85, 85);
+}
 .account-details{
     height: 250px; 
     width: 100%;

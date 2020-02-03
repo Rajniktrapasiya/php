@@ -1,0 +1,94 @@
+SELECT
+A.*,
+B.*
+FROM
+customers AS A
+INNER JOIN
+customer_address AS B
+on A.id = B.foreignKey
+INNER JOIN 
+CUSTOMER_ADD_OTHER
+ON A.ID = 
+//----------------------------------------------------------------------------------
+SELECT customers_id
+,MAX(CASE WHEN fieldKey = "discriptionAboutSelf" THEN CA.value END) discriptionAboutSelf
+,MAX(CASE WHEN fieldKey = "uploadImage" THEN CA.value END) uploadImage
+,MAX(CASE WHEN fieldKey = "uploadCertificate" THEN CA.value END) uploadCertificate
+,MAX(CASE WHEN fieldKey = "howLongInBusiness" THEN CA.value END) howLongInBusiness
+,MAX(CASE WHEN fieldKey = "numberOfClients" THEN CA.value END) numberOfClients
+,MAX(CASE WHEN fieldKey = "getInTouch" THEN CA.value END) getInTouch
+,MAX(CASE WHEN fieldKey = "Hobbies" THEN CA.value END) Hobbies
+FROM customer_additional_info CA
+GROUP BY customers_id
+
+
+---------------------------------------------------------
+SELECT
+	T.customers_id,
+	T.firstName,
+    MIN(T.discriptionAboutSelf) AS discriptionAboutSelf,
+    MIN(T.uploadImage) AS uploadImage,
+    MIN(T.uploadCertificate) AS uploadCertificate,
+    MIN(T.howLongInBusiness) AS howLongInBusiness,
+    MIN(T.numberOfClients) AS numberOfClients,
+    MIN(T.getInTouch) AS getInTouch,
+    MIN(T.Hobbies) AS Hobbies
+FROM (
+    SELECT
+	A.customers_id,
+    A.firstName,
+    (
+        CASE WHEN fieldKey = "discriptionAboutSelf" THEN CA.value
+    END
+) discriptionAboutSelf,
+(
+    CASE WHEN fieldKey = "uploadImage" THEN CA.value
+END
+) uploadImage,
+(
+    CASE WHEN fieldKey = "uploadCertificate" THEN CA.value
+END
+) uploadCertificate,
+(
+    CASE WHEN fieldKey = "howLongInBusiness" THEN CA.value
+END
+) howLongInBusiness,
+(
+    CASE WHEN fieldKey = "numberOfClients" THEN CA.value
+END
+) numberOfClients,
+(
+    CASE WHEN fieldKey = "getInTouch" THEN CA.value
+END
+) getInTouch,
+(
+    CASE WHEN fieldKey = "Hobbies" THEN CA.value
+END
+) Hobbies
+FROM
+    customers A
+INNER JOIN customer_additional_info CA ON
+    A.customers_id = CA.customers_id
+) AS T
+GROUP BY T.customers_id
+
+
+SELECT
+A.*,
+B.addressLine1,B.addressLine2,B.compunyName,B.cityName,B.state,B.country,B.postalCode,
+CA.customers_id
+,MAX(CASE WHEN fieldKey = "discriptionAboutSelf" THEN CA.value END) discriptionAboutSelf
+,MAX(CASE WHEN fieldKey = "uploadImage" THEN CA.value END) uploadImage
+,MAX(CASE WHEN fieldKey = "uploadCertificate" THEN CA.value END) uploadCertificate
+,MAX(CASE WHEN fieldKey = "howLongInBusiness" THEN CA.value END) howLongInBusiness
+,MAX(CASE WHEN fieldKey = "numberOfClients" THEN CA.value END) numberOfClients
+,MAX(CASE WHEN fieldKey = "getInTouch" THEN CA.value END) getInTouch
+,MAX(CASE WHEN fieldKey = "Hobbies" THEN CA.value END) Hobbies
+FROM
+customers A
+INNER JOIN
+customer_address B
+on A.customers_id = B.customers_id
+INNER JOIN
+customer_additional_info CA
+ON A.customers_id = CA.customers_id

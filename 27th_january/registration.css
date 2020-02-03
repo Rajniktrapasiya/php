@@ -1,0 +1,17 @@
+.subClass{
+    height: 250px; 
+    width: 100%;
+    margin-top: 10px;
+    border: 2px solid black;
+}
+
+.otherInformation{
+    display: none;
+    height: 530px; 
+    width: 100%;
+    margin-top: 10px;
+    border: 2px solid black;
+}
+.error{
+    color: rgb(255, 85, 85);
+}
