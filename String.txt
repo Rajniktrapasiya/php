@@ -1,0 +1,15 @@
+explode:-
+
+defination:- when we intrested arry to string conversation by specific value that time this function use.
+
+syntax :- explode(",",$arr);
+
+example:-
+
+  $arr={
+	[0] = 1;
+	[1] =2;
+	[2] = 3;
+    }
+
+output:- "1,2,3"
