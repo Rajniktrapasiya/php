@@ -11,8 +11,8 @@ function insertBlogIntoDb($arr){
     foreach($arr as $key => $value) {
         $insertBlogQuery .= "'".$value."',";
     }
-    $insertBlogQuery .= ",'".$_SESSION['userId']."')";
-    echo "<br>".$insertBlogQuery;
+    $insertBlogQuery .= "'".$_SESSION['userId']."')";
+    // echo "<br>".$insertBlogQuery;
     exicuteQuery($insertBlogQuery);
 
 }

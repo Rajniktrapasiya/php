@@ -1,7 +1,6 @@
 <?php
 
-unset($_SESSION);
-
+session_unset();
 header("Location:Login.php");
 
 ?>

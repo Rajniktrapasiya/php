@@ -8,9 +8,10 @@
 </head>
 <body>
     <?php 
-    if(empty($_SESSION['session'])) {
+    if(!isset($_SESSION['session'])) {
         die("Plese goto Login Page");
     }
+    //echo $_SESSION['session'];
     ?>
     <h1>BLOG POSTS</h1>
     <a href="addNewBlogPost.php">addBlogPost</a>
@@ -75,7 +76,7 @@
                     if($column == 0) {
                         echo  "<th style='border: 1px solid black'>".$field."</th>";
                     }
-                    if($column == 0 && $field == "userId") {
+                    if($column == 0 && $field == "content") {
                         echo "<th>PERFORM OPERATION</th></tr><tr>";
                     }
                 }

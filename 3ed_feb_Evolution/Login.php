@@ -8,7 +8,44 @@
 </head>
 <body>
     <?php
-        
+    if(isset($_POST['login'])) {
+        $selectUserTable = "SELECT * FROM `userinfo`";
+        include_once "databaseConnection.php";
+        $conn = openCon();
+        mysqli_select_db($conn , 'test');
+        $user = mysqli_query($conn,$selectUserTable);
+        session_start();
+        // echo "<pre>";
+        // print_r($user);
+        // echo "</pre>";
+        $bolpass = false;
+        $bolemail = false;
+        if ($row = mysqli_num_rows($user) > 0) {
+            foreach($user as $column => $currentRow) {
+                
+                foreach($currentRow as $field => $VALUE) {
+                    if($field == "email") {
+                        if($_POST['email'] == $VALUE) {
+                            $bolemail = true; 
+                        }
+                    }
+                    if($field == "password") {
+                        if($_POST['password'] == $VALUE) {
+                            $bolpass = true;
+                            $_SESSION['userId'] = $currentRow['userId'];
+                        }
+                    }
+                }
+                if($bolemail == true && $bolpass == true) {
+                    
+                    $_SESSION['session'] = "Yes";
+                    header("Location:blogPost.php");
+                } else {
+                    $err = "Please Enter Valid Email End PassWord";
+                }
+            }
+        }
+    }
     ?>
     <form method="POST" action="Login.php">
     <h1>LoGIN</h1>
@@ -19,6 +56,7 @@
     <div class="password">
     <label>PassWord</label>
     <input type="password" name="password" >
+    <span><?php echo isset($err)? $err: "";?></span>
     </div>
     <div class="Submit">
     <label>Email</label>

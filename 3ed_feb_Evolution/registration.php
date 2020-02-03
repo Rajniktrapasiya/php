@@ -7,7 +7,11 @@
     <title>Registration</title>
 </head>
 <body>
-    <?php include_once "validation.php";?>
+    <?php include_once "validation.php";
+    if(empty($_SESSION['session'])) {
+        die("Plese goto Login Page");
+    }
+    ?>
     <form action="registration.php" method="POST">
         <div class="user-details">
             <h3>REGISTRATION</h3>

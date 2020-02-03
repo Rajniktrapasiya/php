@@ -10,13 +10,15 @@
 
 <?php
     session_start();
-    if(empty($_SESSION['session'])) {
+    if(!isset($_SESSION['session'])) {
         die("Plese goto Login Page");
     }
     include_once "insertDataBase.php";
+    // echo "<pre>";
+    // print_r($_POST);
+    if(isset($_POST["submit"])) {
     insertBlogIntoDb($_POST);
-   
-    
+    }
 
 ?>
     <h1>Add New Blog Post</h1>
@@ -40,14 +42,19 @@
             </div>
             <div class="catagory">
                 <label>catagory</label>
-                <input type="text" name="categoryName">
+                <?php $arr =["Lifestyle","Helth","Education","Music"];?>
+                <select name="categoryName" multiple>
+                    <?php foreach($arr as $key => $value) :?>
+                        <option value="<?php echo $value;?>"><?php echo $value;?></option>
+                    <?php endforeach?>
+                </select>
             </div>
             <div class="uploadImage">
                 <label>Image</label>
                 <input type="file" name="image">
             </div>
         </div>
-        <input type="submit" value="SUBMIT">
+        <input type="submit" name="submit" value="SUBMIT">
     </form>
 </body>
 </html>

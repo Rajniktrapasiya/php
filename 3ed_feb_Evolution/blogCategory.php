@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-        if(empty($_SESSION['session'])) {
+        if(!isset($_SESSION['session'])) {
             die("Plese goto Login Page");
         }
     ?>
@@ -76,7 +76,7 @@
                     if($column == 0) {
                         echo  "<th style='border: 1px solid black'>".$field."</th>";
                     }
-                    if($column == 0 && $field == "userId") {
+                    if($column == 0 && $field == "meta Title") {
                         echo "<th>PERFORM OPERATION</th></tr><tr>";
                     }
                 }

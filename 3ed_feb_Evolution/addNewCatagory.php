@@ -9,7 +9,7 @@
 <body>
 <?php
     include_once "insertDataBase.php";
-    if(empty($_SESSION['session'])) {
+    if(!isset($_SESSION['session'])) {
         die("Plese goto Login Page");
     }
     echo "<pre>";
