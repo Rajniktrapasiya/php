@@ -36,6 +36,7 @@ function updateBlogIntoDb($arr) {
     //echo $updateBlogQuery;
     exicuteQuery($updateBlogQuery);
     unset($_SESSION['updatePostId']);
+    unset($_SESSION['updatePost']);
     header("Location:blogPost.php");
 }
 

@@ -34,13 +34,13 @@
     $deleteQuery = "DELETE FROM `userblogpost` WHERE postId =";
     $result = mysqli_query($conn, $selcetQuery);
 
-    if(isset($_POST["submit"]) || isset($_POST["delete"])) {
+    if(isset($_GET["edit"]) || isset($_GET["delete"])) {
         //echo "----------".$_REQUEST["submit"];
-        if(isset($_POST["delete"])) {
-            IntregrationData($_REQUEST["delete"]);
+        if(isset($_GET["delete"])) {
+            IntregrationData($_GET["delete"]);
             //echo "----------".$_REQUEST["delete"];
         } else {
-            IntregrationData($_REQUEST["submit"]);
+            IntregrationData($_GET["edit"]);
         }
     }
 
@@ -49,7 +49,7 @@
         global $result,$conn,$deleteQuery;
         $_SESSION["dataBase"] = "Yes";
         
-        if(isset($_POST["delete"])) {
+        if(isset($_GET["delete"])) {
             $deleteQuery .= $num;
             echo $deleteQuery;
             if(mysqli_query($conn,$deleteQuery)) {
@@ -58,10 +58,10 @@
             } else {
                 echo "Error Connecting Database  :-".mysqli_error($conn)."<br>";
             }
-            header("Location:blogCategory.php");
+            header("Location:blogPost.php");
         }
-        if(isset($_POST["submit"])) {
-            
+        if(isset($_GET["edit"])) {
+            $result =mysqli_query($conn, "SELECT * FROM `userblogpost`");;
             foreach($result as $column => $currentRow) {
                 //print_r($currentRow);
                 if($currentRow['postId'] == $num) {
@@ -98,7 +98,7 @@
                         echo  "<td style='border: 1px solid black'>".$VALUE."</td>";
                     }
                 }
-                echo "<td style='border: 1px solid black'><input type='submit' name='submit' value='".$currentRow['postId']."' onclick ='this.".$currentRow['postId']."'><input type='submit' name='delete' value='".$currentRow['postId']."' onclick ='this.".$currentRow['postId']."'></td></tr>";
+                echo "<td style='border: 1px solid black'><a href='blogPost.php?edit=".$currentRow['postId']."'>Edit</a> <a href='blogPost.php?delete=".$currentRow['postId']."'>Delete</a></td></tr>";
             }
         } else {
             echo "0 results";

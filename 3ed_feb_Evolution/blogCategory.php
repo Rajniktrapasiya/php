@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog Category</title>
-    <script>
-        function chngevalue(i) {
-            document.getElementsByName("delete").values = i;
-        }
-    </script>
 </head>
 <body>
     <?php
@@ -30,20 +25,20 @@
 <?php
     include_once "insertDataBase.php";
     include_once "manageEditing.php";
-    $conn = openCon();
+    //$conn = openCon();
     //session_start();
     mysqli_select_db($conn , 'test');
     $selcetQuery = "SELECT `categoryId`, `categoryImage`, `categoryName`,`createdDate` FROM `categorytable`";
     $deleteQuery = "DELETE FROM `categorytable` WHERE categoryId =";
     $result = mysqli_query($conn, $selcetQuery);
 
-    if(isset($_POST["submit"]) || isset($_POST["delete"])) {
-        //echo "----------".$_REQUEST["submit"];
-        if(isset($_POST["delete"])) {
-            IntregrationData($_REQUEST["delete"]);
+    if(isset($_GET["edit"]) || isset($_GET["delete"])) {
+        echo "----------";
+        if(isset($_GET["delete"])) {
+            IntregrationData($_GET["delete"]);
             //echo "----------".$_REQUEST["delete"];
         } else {
-            IntregrationData($_REQUEST["submit"]);
+            IntregrationData($_GET["edit"]);
         }
     }
 
@@ -52,7 +47,7 @@
         global $result,$conn,$deleteQuery;
         $_SESSION["dataBase"] = "Yes";
         //echo "call";
-        if(isset($_POST["delete"])) {
+        if(isset($_GET["delete"])) {
             $deleteQuery .= $num;
             //echo $deleteQuery;
             if(mysqli_query($conn,$deleteQuery)) {
@@ -63,8 +58,9 @@
             }
             header("Location:blogCategory.php");
         }
-        if(isset($_POST["submit"])) {
+        if(isset($_GET["edit"])) {
             //$_SESSION['userId'] = $currentRow['userId'];
+            $result = mysqli_query($conn, "SELECT * FROM `categorytable`");
             foreach($result as $column => $currentRow) {
                 if($currentRow['categoryId'] == $num) {
 
@@ -100,7 +96,7 @@
                         echo  "<td style='border: 1px solid black'>".$VALUE."</td>";
                     }
                 }
-                echo "<td style='border: 1px solid black'><input type='submit' name='submit' value='".$currentRow['categoryId']."' onclick ='this.".$currentRow['categoryId']."'><input type='submit' name='delete' value='".$currentRow['categoryId']."' onclick ='chngevalue(".$currentRow['categoryId'].")'></td></tr>";
+                echo "<td style='border: 1px solid black'><a href='blogCategory.php?edit=".$currentRow['categoryId']."'>Edit</a> <a href='blogCategory.php?delete=".$currentRow['categoryId']."'>Delete</a></td></tr>";
             }
         } else {
             echo "0 results";

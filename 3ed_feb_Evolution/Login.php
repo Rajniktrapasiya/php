@@ -32,17 +32,19 @@
                     if($field == "password") {
                         if($_POST['password'] == $VALUE) {
                             $bolpass = true;
-                            $_SESSION['userId'] = $currentRow['userId'];
                         }
                     }
+                    if($bolemail == true && $bolpass == true) {
+                        $_SESSION["user"] = $currentRow;
+                        $_SESSION["userId"] = $currentRow["userId"];
+                        $bolemail = false;
+                        $bolpass = false;
+                        $_SESSION['session'] = "Yes";
+                        header("Location:blogPost.php");
+                    }
                 }
-                if($bolemail == true && $bolpass == true) {
-                    
-                    $_SESSION['session'] = "Yes";
-                    //print_r($_SESSION);
-                    header("Location:blogPost.php");
-                } else {
-                    $err = "Please Enter Valid Email End PassWord";
+                if($bolemail == false && $bolpass == false) {
+                    $err = "Please Enter Valid Email And PassWord";
                 }
             }
         }
@@ -60,7 +62,6 @@
     <span><?php echo isset($err)? $err: "";?></span>
     </div>
     <div class="Submit">
-    <label>Email</label>
     <input type="submit" name="login" value="LOGIN" >
     <a href="registration.php">REGISTRATION</a>
     </div>

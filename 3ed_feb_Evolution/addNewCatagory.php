@@ -73,10 +73,11 @@
             <div class="parentCatagory">
                 <label>parent Catagory</label>
                 <select name="parentCategory" form="addNewCategory">
-                <?php foreach ($arr as $key) :?>
-                    <?php $array = getValue("parentCategory");?>
-                    <option value="<?php echo $key?>" <?php if($array == $key){ echo "SELECTED";}?>><?php echo $key?></option>
-                <?php endforeach ?>
+                    <?php $q = "select categoryName from categorytable where categoryId =".getValue("parentCategory"); ?> 
+                    <?php $array = mysqli_fetch_assoc(mysqli_query($conn,$q)); ?>
+                    <?php foreach ($arr as $key) :?>
+                        <option value="<?php echo $key?>" <?php if($array["categoryName"] == $key){ echo "SELECTED";}?>><?php echo $key?></option>
+                    <?php endforeach ?>
                 </select>
             </div>
             <div class="uploadImage">

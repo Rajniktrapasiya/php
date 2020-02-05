@@ -10,9 +10,6 @@
     <?php
     session_start();
     include_once "validation.php";
-    if(empty($_SESSION['session'])) {
-        die("Plese goto Login Page");
-    }
     ?>
     <form action="registration.php" method="POST">
         <div class="user-details">
@@ -63,7 +60,7 @@
             </div>
             <div name="user-information">
                 <label>INFORMATION</label>
-                <input type="text" name="user[information]" style="height: 30px;">
+                <input type="text" name="user[information]" value="<?php echo getValue("user","information"); ?>" style="height: 30px;">
             </div>
         </div>
         <input type="checkbox" name="user[termCondition]"><label>Heaberly,accept term and condition</label><span><?php echo isset($acceptTermErr) ? $acceptTermErr : ""; ?></span>

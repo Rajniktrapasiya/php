@@ -16,8 +16,8 @@ if(isset($_POST['registrationPageSubmit'])) {
                 setValue($key,$valuekey);
             }
         }
+        $_SESSION['session'] = "Yes";
         insertIntoDb($_POST["user"]);
-    } else {
     }
 }
 
