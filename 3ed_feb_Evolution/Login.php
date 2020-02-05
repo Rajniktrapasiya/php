@@ -39,6 +39,7 @@
                 if($bolemail == true && $bolpass == true) {
                     
                     $_SESSION['session'] = "Yes";
+                    //print_r($_SESSION);
                     header("Location:blogPost.php");
                 } else {
                     $err = "Please Enter Valid Email End PassWord";

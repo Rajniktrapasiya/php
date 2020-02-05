@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 include_once "insertDataBase.php";
 if(isset($_POST['registrationPageSubmit'])) {
     $firstNameErr = $lastNameErr = $emailErr = $phoneErr = $confirmPassWordErr="";

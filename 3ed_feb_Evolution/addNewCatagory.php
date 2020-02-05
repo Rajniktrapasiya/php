@@ -4,46 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>AddNewCategory</title>
 </head>
 <body>
 <?php
+    session_start();
     include_once "insertDataBase.php";
+    include_once "manageEditing.php";
     if(!isset($_SESSION['session'])) {
         die("Plese goto Login Page");
     }
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-    if(isset($_POST['submit'])) {
-        insertCategoryIntoDb($_POST);
+    if(isset($_POST['submit'])){
+        $filename = $_FILES['categoryImage']['name'];
+        $tempName = $_FILES['categoryImage']['tmp_name'];
+        if(isset($filename)) {
+            $location = "images/";
+            if(move_uploaded_file($tempName,$location.$filename)) {
+                echo "Uploaded";
+            }
+        }
+        $_POST['categoryImage'] = $filename;
+        mysqli_select_db($conn,"test");
+        $category = mysqli_query($conn,"SELECT * FROM `categorytable`");
+        while($row = mysqli_fetch_assoc($category)) {
+            if($row['categoryName'] == $_POST['parentCategory']) {
+                $_POST['parentCategory'] = $row['categoryId'];
+            }
+        }
+        if(isset($_SESSION['updateCategory'])) {
+            updateCategoryIntoDb($_POST);
+        } else {
+            insertCategoryIntoDb($_POST);
+        }
     }
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
+    
+    
+    $arr = [];
+    mysqli_select_db($conn,"test");
+    $result = mysqli_query($conn,"SELECT categoryName FROM `categorytable`");
+    while($row = mysqli_fetch_assoc($result)) {
+        array_push($arr,$row['categoryName']);
+    }
+    
+
 ?>
 <h1>Add New catagory</h1>
-    <form method="POST" action="addNewCatagory.php">
+    <form method="POST" action="addNewCatagory.php" id="addNewCategory" enctype="multipart/form-data">
         <div class="AddNewCatagory">
             <div class="title">
                 <label>Title</label>
-                <input type="text" name="categoryName">
+                <input type="text" name="categoryName" value="<?php echo getValue("categoryName"); ?>">
             </div>
             <div class="content">
                 <label>content</label>
-                <input type="text" style="height:40px; width:200px;" name="content">
+                <input type="text" style="height:40px; width:200px;" name="categoryContent" value="<?php echo getValue("categoryContent"); ?>">
             </div>
             <div class="URL">
                 <label>URL</label>
-                <input type="text" name="url">
+                <input type="text" name="categoryUrl" value="<?php echo getValue("categoryUrl"); ?>">
             </div>
             <div class="metaTitel">
                 <label>Meta Title</label>
-                <input type="text" name="meta Title">
+                <input type="text" name="categoryMetaTitle" value="<?php echo getValue("categoryMetaTitle"); ?>">
             </div>
             <div class="parentCatagory">
                 <label>parent Catagory</label>
-                <?php $arr =["Electronics","Education","Accesories","Automobile"];?>
-                <select>
+                <select name="parentCategory" form="addNewCategory">
                 <?php foreach ($arr as $key) :?>
-                    <option value="<?php $key?>" ><?php echo $key?></option>
+                    <?php $array = getValue("parentCategory");?>
+                    <option value="<?php echo $key?>" <?php if($array == $key){ echo "SELECTED";}?>><?php echo $key?></option>
                 <?php endforeach ?>
                 </select>
             </div>
