@@ -15,26 +15,23 @@
         mysqli_select_db($conn , 'test');
         $user = mysqli_query($conn,$selectUserTable);
         session_start();
-        // echo "<pre>";
-        // print_r($user);
-        // echo "</pre>";
         $bolpass = false;
         $bolemail = false;
         if ($row = mysqli_num_rows($user) > 0) {
-            foreach($user as $column => $currentRow) {
+            foreach ($user as $column => $currentRow) {
                 
-                foreach($currentRow as $field => $VALUE) {
-                    if($field == "email") {
-                        if($_POST['email'] == $VALUE) {
+                foreach ($currentRow as $field => $VALUE) {
+                    if ($field == "email") {
+                        if ($_POST['email'] == $VALUE) {
                             $bolemail = true; 
                         }
                     }
-                    if($field == "password") {
-                        if($_POST['password'] == $VALUE) {
+                    if ($field == "password") {
+                        if ($_POST['password'] == $VALUE) {
                             $bolpass = true;
                         }
                     }
-                    if($bolemail == true && $bolpass == true) {
+                    if ($bolemail == true && $bolpass == true) {
                         $_SESSION["user"] = $currentRow;
                         $_SESSION["userId"] = $currentRow["userId"];
                         $bolemail = false;
@@ -43,7 +40,7 @@
                         header("Location:blogPost.php");
                     }
                 }
-                if($bolemail == false && $bolpass == false) {
+                if ($bolemail == false && $bolpass == false) {
                     $err = "Please Enter Valid Email And PassWord";
                 }
             }

@@ -11,41 +11,37 @@
     session_start();
     include_once "insertDataBase.php";
     include_once "manageEditing.php";
-    if(!isset($_SESSION['session'])) {
+    if (!isset($_SESSION['session'])) {
+        header("Location:Login.php");
         die("Plese goto Login Page");
     }
-    if(isset($_POST['submit'])){
+    if (isset($_POST['submit'])){
         $filename = $_FILES['categoryImage']['name'];
         $tempName = $_FILES['categoryImage']['tmp_name'];
-        if(isset($filename)) {
+        if (isset($filename)) {
             $location = "images/";
-            if(move_uploaded_file($tempName,$location.$filename)) {
+            if (move_uploaded_file($tempName,$location.$filename)) {
                 echo "Uploaded";
             }
         }
         $_POST['categoryImage'] = $filename;
         mysqli_select_db($conn,"test");
         $category = mysqli_query($conn,"SELECT * FROM `categorytable`");
-        while($row = mysqli_fetch_assoc($category)) {
-            if($row['categoryName'] == $_POST['parentCategory']) {
+        while ($row = mysqli_fetch_assoc($category)) {
+            if ($row['categoryName'] == $_POST['parentCategory']) {
                 $_POST['parentCategory'] = $row['categoryId'];
             }
         }
-        if(isset($_SESSION['updateCategory'])) {
+        if (isset($_SESSION['updateCategory'])) {
             updateCategoryIntoDb($_POST);
         } else {
             insertCategoryIntoDb($_POST);
         }
     }
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "</pre>";
-    
-    
     $arr = [];
     mysqli_select_db($conn,"test");
     $result = mysqli_query($conn,"SELECT categoryName FROM `categorytable`");
-    while($row = mysqli_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         array_push($arr,$row['categoryName']);
     }
     

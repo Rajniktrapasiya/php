@@ -1,7 +1,12 @@
 <?php
 
+if (!isset($_SESSION['session'])) {
+    header("Location:Login.php");
+    die("Plese goto Login Page");
+}
+
 function setProfileItem($arr) {
-    foreach($arr as $key => $value) {
+    foreach ($arr as $key => $value) {
         setValue($arr,$key);
     }
     echo "<pre>";
@@ -9,56 +14,66 @@ function setProfileItem($arr) {
     echo "</pre>";
 }
 
+function IntregrationData($num,$deleteQuery){
+    global $conn;
+    $_SESSION["dataBase"] = "Yes";
+    if (isset($_GET["blogdelete"]) || isset($_GET["categorydelete"])) {
+        $deleteQuery .= $num;
+        exicuteQuery($deleteQuery);
+        isset($_GET["blogdelete"]) ? header("Location:blogPost.php") : header("Location:blogCategory.php");
+    }
+    if (isset($_GET["blogedit"]) || $_GET["categoryedit"]) {
+        $result = isset($_GET["blogedit"]) ? mysqli_query($conn, "SELECT * FROM `userblogpost`") : mysqli_query($conn, "SELECT * FROM `categorytable`");;
+        foreach ($result as $column => $currentRow) {
+            if (isset($_GET["blogedit"]) ? $currentRow['postId'] : $currentRow['categoryId'] == $num) {
+                if (isset($_GET["blogedit"])) {
+                    $_SESSION['updatePostId'] = $currentRow['postId'];
+                    editblog($currentRow);
+                } else {
+                    editCatagory($currentRow);
+                }
+            }
+        }
+    }
+}
+
+
 function editblog($arr) {
-    if(isset($arr['categoryName'])) {
+    if (isset($arr['categoryName'])) {
         $arr['categoryName'] = explode("_",$arr['categoryName']);
     }
-    // echo "<pre>";
-    // print_r($arr);
-    // echo "</pre>";
-    foreach($arr as $key => $value) {
+    foreach ($arr as $key => $value) {
         
         setValue($arr,$key);
       
     }
     $_SESSION['updatePost'] = "Yes";
-    // echo "<pre>";
-    // print_r($_SESSION);
-    // echo "</pre>";
     header("Location:addNewBlogPost.php");
 }
 
 function editCatagory($arr) {
-    // echo "<pre>";
-    // print_r($arr);
-    // echo "</pre>";
-    foreach($arr as $key => $value) {
+    foreach ($arr as $key => $value) {
         setValue($arr,$key);
     }
     $_SESSION['updateCategory'] = "Yes";
-    // echo "<pre>";
-    // print_r($_SESSION);
-    // echo "</pre>";
     header("Location:addNewCatagory.php");
 }
 
 
 function setSession($arr) {
-    foreach($arr as $key => $value) {
+    foreach ($arr as $key => $value) {
         foreach ($value as $valuekey => $subvalue) {
             $_SESSION[$key][$valuekey] = $arr[$key][$valuekey];
         }
     }
-    echo "----------------------";
-    print_r($_SESSION);
     header("Location:practice.php");
 }
 
 function getValue($key,$returntype="") {
-    if(isset($_POST[$key])) {
-        if(is_array($_POST[$key])) {
+    if (isset($_POST[$key])) {
+        if (is_array($_POST[$key])) {
             $temp = [];
-            foreach($_POST[$key] as $value1) {
+            foreach ($_POST[$key] as $value1) {
                 array_push($temp,$value1);
             }
             $_POST[$key] = $temp;

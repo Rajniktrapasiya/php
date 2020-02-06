@@ -9,8 +9,22 @@
 <body>
     <?php
         session_start();
-        if(!isset($_SESSION['session'])) {
+        if (!isset($_SESSION['session'])) {
+            header("Location:Login.php");
             die("Plese goto Login Page");
+        }
+        include_once "insertDataBase.php";
+        include_once "manageEditing.php";
+        mysqli_select_db($conn , 'test');
+        $selcetQuery = "SELECT `categoryId`, `categoryImage`, `categoryName`,`createdDate` FROM `categorytable`";
+        $deleteQuery = "DELETE FROM `categorytable` WHERE categoryId =";
+        $result = mysqli_query($conn, $selcetQuery);
+        if (isset($_GET["categoryedit"]) || isset($_GET["categorydelete"])) {
+            if (isset($_GET["categorydelete"])) {
+                IntregrationData($_GET["categorydelete"],$deleteQuery);
+            } else {
+                IntregrationData($_GET["categoryedit"],"");
+            }
         }
     ?>
 <h1>BLOG Category</h1>
@@ -23,53 +37,7 @@
     <br>
     <br>
 <?php
-    include_once "insertDataBase.php";
-    include_once "manageEditing.php";
-    //$conn = openCon();
-    //session_start();
-    mysqli_select_db($conn , 'test');
-    $selcetQuery = "SELECT `categoryId`, `categoryImage`, `categoryName`,`createdDate` FROM `categorytable`";
-    $deleteQuery = "DELETE FROM `categorytable` WHERE categoryId =";
-    $result = mysqli_query($conn, $selcetQuery);
-
-    if(isset($_GET["edit"]) || isset($_GET["delete"])) {
-        echo "----------";
-        if(isset($_GET["delete"])) {
-            IntregrationData($_GET["delete"]);
-            //echo "----------".$_REQUEST["delete"];
-        } else {
-            IntregrationData($_GET["edit"]);
-        }
-    }
-
-
-    function IntregrationData($num){
-        global $result,$conn,$deleteQuery;
-        $_SESSION["dataBase"] = "Yes";
-        //echo "call";
-        if(isset($_GET["delete"])) {
-            $deleteQuery .= $num;
-            //echo $deleteQuery;
-            if(mysqli_query($conn,$deleteQuery)) {
-                echo "Data inserted<br>";
-                
-            } else {
-                echo "Error Connecting Database  :-".mysqli_error($conn)."<br>";
-            }
-            header("Location:blogCategory.php");
-        }
-        if(isset($_GET["edit"])) {
-            //$_SESSION['userId'] = $currentRow['userId'];
-            $result = mysqli_query($conn, "SELECT * FROM `categorytable`");
-            foreach($result as $column => $currentRow) {
-                if($currentRow['categoryId'] == $num) {
-
-                    editCatagory($currentRow);
-                }
-            }
-        }
-    }
-
+    
     ?>
     <form method="POST" action="blogCategory.php">
     <?php
@@ -79,24 +47,24 @@
         $imageLocation = substr($imageLocation, 0, -1);
         if ($row = mysqli_num_rows($result) > 0) {
             // output data of each row
-            foreach($result as $column => $currentRow) {
+            foreach ($result as $column => $currentRow) {
                 echo "<tr>";
-                foreach($currentRow as $field => $VALUE) {
-                    if($column == 0) {
+                foreach ($currentRow as $field => $VALUE) {
+                    if ($column == 0) {
                         echo  "<th style='border: 1px solid black'>".$field."</th>";
                     }
-                    if($column == 0 && $field == "createdDate") {
+                    if ($column == 0 && $field == "createdDate") {
                         echo "<th>PERFORM OPERATION</th></tr><tr>";
                     }
                 }
-                foreach($currentRow as $field => $VALUE) {
-                    if($field == "categoryImage") {
+                foreach ($currentRow as $field => $VALUE) {
+                    if ($field == "categoryImage") {
                         echo  "<td style='border: 1px solid black'><image style='height:50px; width:50px;' src='".$imageLocation.$VALUE."'></td>";
                     } else {
                         echo  "<td style='border: 1px solid black'>".$VALUE."</td>";
                     }
                 }
-                echo "<td style='border: 1px solid black'><a href='blogCategory.php?edit=".$currentRow['categoryId']."'>Edit</a> <a href='blogCategory.php?delete=".$currentRow['categoryId']."'>Delete</a></td></tr>";
+                echo "<td style='border: 1px solid black'><a href='blogCategory.php?categoryedit=".$currentRow['categoryId']."'>Edit</a> <a href='blogCategory.php?categorydelete=".$currentRow['categoryId']."'>Delete</a></td></tr>";
             }
         } else {
             echo "0 results";

@@ -10,13 +10,12 @@
 
 <?php
     session_start();
-    if(!isset($_SESSION['session'])) {
+    if (!isset($_SESSION['session'])) {
+        header("Location:Login.php");
         die("Plese goto Login Page");
     }
     include_once "insertDataBase.php";
     include_once "manageEditing.php";
-    // echo "<pre>";
-    // print_r($_POST);
     if(isset($_POST["submit"])) {
         $filename = $_FILES['image']['name'];
         $tempName = $_FILES['image']['tmp_name'];

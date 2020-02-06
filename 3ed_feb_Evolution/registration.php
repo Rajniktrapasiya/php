@@ -18,7 +18,7 @@
                 <?php $prifixValue=["Mr","Miss","Ms","Mrs","Dr"];?>
                 <label>Prefix</label>
                 <select name="user[prefix]">
-                    <?php foreach($prifixValue as $key => $value): ?>
+                    <?php foreach ($prifixValue as $key => $value): ?>
                         <option value="<?php echo $value?>"><?php echo $value?>
                     <?php endforeach ?>
                 </select>
@@ -55,7 +55,7 @@
             <div name="user-confirmPassword">
                 <?php $confirmPassword = "user[confirmPassword]"?>    
                 <label>ConfirmPassWord:-</label>
-                <input type="password" name="<?php echo $confirmPassword; ?>" value="<?php echo getValue("user","confirmPassword"); ?>">
+                <input type="password" name="<?php echo $confirmPassword; ?>" value="<?php echo getValue("user","password"); ?>">
                 <span class="error"><?php echo isset($confirmPassWordErr) ? $confirmPassWordErr : ""; ?></span>
             </div>
             <div name="user-information">

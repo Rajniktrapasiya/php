@@ -1,17 +1,16 @@
 <?php
 
-//session_start();
 include_once "insertDataBase.php";
-if(isset($_POST['registrationPageSubmit'])) {
+if (isset($_POST['registrationPageSubmit'])) {
     $firstNameErr = $lastNameErr = $emailErr = $phoneErr = $confirmPassWordErr="";
     $acceptTermErr = "-------Check Term Condition";
-    foreach($_POST as $key => $value) {
-        foreach($value as $key1 => $value1) {
+    foreach ($_POST as $key => $value) {
+        foreach ($value as $key1 => $value1) {
             validationItems($key1);
         }
     }
-    if($firstNameErr == "" && $lastNameErr == "" && $emailErr == "" && $phoneErr == "" && $confirmPassWordErr == "" && $acceptTermErr == "") {
-        foreach($_POST as $key => $value) {
+    if ($firstNameErr == "" && $lastNameErr == "" && $emailErr == "" && $phoneErr == "" && $confirmPassWordErr == "" && $acceptTermErr == "") {
+        foreach ($_POST as $key => $value) {
             foreach ($value as $valuekey => $subvalue) {
                 setValue($key,$valuekey);
             }
@@ -22,10 +21,10 @@ if(isset($_POST['registrationPageSubmit'])) {
 }
 
 function getValue($key,$value,$returntype="") {
-    if(isset($_POST[$key][$value])) {
-        if(is_array($_POST[$key][$value])) {
+    if (isset($_POST[$key][$value])) {
+        if (is_array($_POST[$key][$value])) {
             $temp = [];
-            foreach($_POST[$key][$value] as $value1) {
+            foreach ($_POST[$key][$value] as $value1) {
                 array_push($temp,$value1);
             }
             $_POST[$key][$value] = $temp;
@@ -41,7 +40,7 @@ function setValue($key,$value) {
 
 function validationItems($checkItem) {
     global $firstNameErr , $lastNameErr , $emailErr , $phoneErr , $confirmPassWordErr,$acceptTermErr;
-    switch($checkItem) {
+    switch ($checkItem) {
         case "firstName":
             if (!preg_match("/^[a-z,A-Z]{3,20}$/",$_POST['user']['firstName'])) {
                 empty($_POST['user']['firstName']) ? $firstNameErr = "First Name Require." : $firstNameErr = "Enter Valid Name";
