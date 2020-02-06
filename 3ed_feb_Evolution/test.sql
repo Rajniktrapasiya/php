@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2020 at 09:49 AM
+-- Generation Time: Feb 06, 2020 at 11:06 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.26
 
@@ -44,10 +44,9 @@ CREATE TABLE `categorytable` (
 --
 
 INSERT INTO `categorytable` (`categoryId`, `categoryName`, `categoryContent`, `categoryUrl`, `categoryMetaTitle`, `parentCategory`, `categoryImage`, `createdDate`) VALUES
-(2, 'LifeStyle', 'lifestyle', 'http//www.Lifestyle.com', 'life', NULL, 'life.jpeg', '2020-02-04 12:05:00'),
-(3, 'Freelancer', 'freelancer', 'htttp//feelancer.com', 'freelancer', 2, 'InkedUntitled_LI.jpg', '2020-02-04 12:05:00'),
-(4, 'Scolarship', 'scolarship', 'htpps//gvhv', 'Scolarship', 3, 'InkedUntitled_LI.jpg', '2020-02-04 12:05:00'),
-(6, 'Goverment', 'Government', 'https//gov.ac.in', 'Government', 2, 'gov.png', '2020-02-04 12:05:00');
+(2, 'LifeStyle', 'hi all is fine', 'https//LifeStyle.ac.in', 'Life', 2, 'live.jpg', '2020-02-05 12:33:07'),
+(6, 'Goverment', 'Government', 'https//gov.ac.in', 'Government', 6, 'gov.png', '2020-02-06 04:39:26'),
+(7, 'Love', 'About Love', 'www.love.in', 'LOVE', 2, 'love.png', '2020-02-05 18:07:18');
 
 -- --------------------------------------------------------
 
@@ -82,10 +81,9 @@ CREATE TABLE `userblogpost` (
 --
 
 INSERT INTO `userblogpost` (`postId`, `categoryName`, `title`, `publishedDate`, `userId`, `url`, `image`, `content`) VALUES
-(2, 'LifeStyle_Scolarship', 'Life', '0000-00-00', 4, 'https.//fh.co.in', 'InkedUntitled_LI.jpg', 'edu cation dep'),
-(3, 'Freelancer_Scolarship_Goverment', 'Life About', '0000-00-00', 12, 'https//freelancer.com', '', 'Life is Not Simple.'),
-(4, 'LifeStyle_Scolarship', 'Book', '0000-00-00', 12, 'https//freelancer.com', 'book.jpg', 'Book is our true friend'),
-(5, 'LifeStyle', 'Living', '1212-02-01', 12, 'https.//fh.co.in', 'live.jpg', 'Living Category');
+(3, 'Freelancer_Scolarship_Goverment', 'Life About', '1999-02-01', 12, 'https//freelancer.com', 'Screenshot (4).png', 'Free lancing'),
+(4, 'LifeStyle_Scolarship', 'Book', '2020-01-05', 12, 'https.//fh.co.in', 'Screenshot (4).png', 'Life is Not Simple.'),
+(5, 'LifeStyle', 'Living', '1212-02-01', 12, 'https.//fh.co.in', 'Screenshot (8).png', 'Living Category');
 
 -- --------------------------------------------------------
 
@@ -109,18 +107,11 @@ CREATE TABLE `userinfo` (
 --
 
 INSERT INTO `userinfo` (`userId`, `prefix`, `firstName`, `lastName`, `email`, `phoneNumber`, `password`, `information`) VALUES
-(1, '', '', '', '', '9904357192', '', ''),
-(2, 'Mr', '', '', '', '', '', ''),
-(3, '', 'Rajnik', '', '', '', '', ''),
-(4, '', '', 'Trapasiya', '', '', '', ''),
-(5, '', '', '', 'trapasiyarajnik82@gmail.com', '', '', ''),
-(6, '', '', '', '', '9904357192', '', ''),
-(7, '', '', '', '', '', 'Tra@2399', ''),
-(8, '', '', '', '', '', '', ''),
 (9, 'Mr', 'Rajnik', 'Trapasiya', 'trapasiyarajnik82@gmail.com', '9904357192', 'Tra@2399', 'hi'),
 (10, 'Mr', 'Rajnik', 'Trapasiya', 'trapasiyarajnik82@gmail.com', '9904357192', 'Tra@2399', 'hi'),
 (11, 'Mr', 'Rajnik', 'Trapasiya', 'trapasiyarajnik82@gmail.com', '9904357192', 'Tra@2399', ''),
-(12, 'Mr', 'Rajnik', 'Trapasiya', 'trapasiyarajnik82@gmail.com', '2312121212', 'Tra@2399', 'hi my name is rajnik');
+(12, 'Mr', 'Rajnik', 'Trapasiya', 'trapasiyarajnik82@gmail.com', '2312121212', 'Tra@2399', 'hi my name is rajnik'),
+(13, 'Mr', 'Nikunj', 'patel', 'trapasiyarajnik2399@gmail.com', '9904357192', 'Tra@2399', 'hi my name is nikunj patel');
 
 --
 -- Indexes for dumped tables
@@ -160,19 +151,19 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `categorytable`
 --
 ALTER TABLE `categorytable`
-  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `userblogpost`
 --
 ALTER TABLE `userblogpost`
-  MODIFY `postId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `postId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
