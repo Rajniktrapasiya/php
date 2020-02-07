@@ -32,7 +32,7 @@
     <a href="blogPost.php">BlogPost</a>
     <a href="addNewBlogPost.php">addBlogPost</a>
     <a href="blogCategory.php">manageCatagory</a>
-    <a href="Registration.php">myProfile</a>
+    <a href="Registration.php?prof=1">myProfile</a>
     <a href="logout.php">Logout</a>
     <br>
     <br>

@@ -24,39 +24,34 @@ function IntregrationData($num,$deleteQuery){
     }
     if (isset($_GET["blogedit"]) || $_GET["categoryedit"]) {
         $result = isset($_GET["blogedit"]) ? mysqli_query($conn, "SELECT * FROM `userblogpost`") : mysqli_query($conn, "SELECT * FROM `categorytable`");;
+        
         foreach ($result as $column => $currentRow) {
-            if (isset($_GET["blogedit"]) ? $currentRow['postId'] : $currentRow['categoryId'] == $num) {
+            $check = isset($_GET["blogedit"]) ? $currentRow['postId'] : $currentRow['categoryId'];
+            if ($check == $num) {
                 if (isset($_GET["blogedit"])) {
                     $_SESSION['updatePostId'] = $currentRow['postId'];
-                    editblog($currentRow);
-                } else {
-                    editCatagory($currentRow);
-                }
+                } 
+                editItem($currentRow);
             }
         }
     }
 }
 
 
-function editblog($arr) {
+function editItem($arr) {
     if (isset($arr['categoryName'])) {
         $arr['categoryName'] = explode("_",$arr['categoryName']);
     }
     foreach ($arr as $key => $value) {
-        
-        setValue($arr,$key);
-      
-    }
-    $_SESSION['updatePost'] = "Yes";
-    header("Location:addNewBlogPost.php");
-}
-
-function editCatagory($arr) {
-    foreach ($arr as $key => $value) {
         setValue($arr,$key);
     }
-    $_SESSION['updateCategory'] = "Yes";
-    header("Location:addNewCatagory.php");
+    if (isset($arr['categoryName'])) {
+        $_SESSION['updatePost'] = "Yes";
+        header("Location:addNewBlogPost.php");
+    } else {
+        $_SESSION['updateCategory'] = "Yes";
+        header("Location:addNewCatagory.php");
+    }
 }
 
 

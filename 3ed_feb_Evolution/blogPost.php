@@ -17,7 +17,9 @@
     include_once "manageEditing.php";
     $selcetPostQuery = "SELECT `postId`, `categoryName`, `title`, `publishedDate` FROM `userblogpost` WHERE userId = ".$_SESSION['userId'];
     $deletePostQuery = "DELETE FROM `userblogpost` WHERE postId =";
+    $SelectCategoryPostQuery = "SELECT CT.`categoryName` FROM `post_category` AS T,`categorytable` as CT WHERE T.categoryId = CT.CategoryId AND PostId = ";
     $result = mysqli_query($conn, $selcetPostQuery);
+    $categoryString = "";
 
     if (isset($_GET["blogedit"]) || isset($_GET["blogdelete"])) {
         if (isset($_GET["blogdelete"])) {
@@ -30,7 +32,7 @@
     <h1>BLOG POSTS</h1>
     <a href="addNewBlogPost.php">addBlogPost</a>
     <a href="blogCategory.php">manageCatagory</a>
-    <a href="Registration.php">myProfile</a>
+    <a href="Registration.php?prof=1">myProfile</a>
     <a href="logout.php">Logout</a>
     <br>
     <form method="POST" action="blogPost.php">
@@ -51,6 +53,18 @@
                 foreach ($currentRow as $field => $VALUE) {
                     if ($field == "image") {
                         echo  "<td style='border: 1px solid black'><image style='height:50px; width:50px;' src='".$imageLocation.$VALUE."'></td>";
+                    } elseif ($field == "categoryName") {
+                        $SelectCategoryPostQuery .= $currentRow['postId'];
+                        $category = mysqli_query($conn, $SelectCategoryPostQuery);
+                        foreach ($category as $key => $value) {
+                            foreach($value as $p){
+                                $categoryString .= $p.",";
+                            }
+                        }
+                        $categoryString = substr($categoryString, 0 ,-1);
+                        echo "<td style='border: 1px solid black'>".$categoryString."</td>";
+                        $categoryString = "";
+                        $SelectCategoryPostQuery = "SELECT CT.`categoryName` FROM `post_category` AS T,`categorytable` as CT WHERE T.categoryId = CT.CategoryId AND PostId = ";
                     } else {
                         echo  "<td style='border: 1px solid black'>".$VALUE."</td>";
                     }

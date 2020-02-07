@@ -11,6 +11,7 @@
     session_start();
     include_once "insertDataBase.php";
     include_once "manageEditing.php";
+    $updateCategoryQuery = "UPDATE `categorytable` SET ";
     if (!isset($_SESSION['session'])) {
         header("Location:Login.php");
         die("Plese goto Login Page");
@@ -33,7 +34,7 @@
             }
         }
         if (isset($_SESSION['updateCategory'])) {
-            updateCategoryIntoDb($_POST);
+            updateIntoDb($_POST,$updateCategoryQuery);
         } else {
             insertCategoryIntoDb($_POST);
         }

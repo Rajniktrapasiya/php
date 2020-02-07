@@ -16,6 +16,7 @@
     }
     include_once "insertDataBase.php";
     include_once "manageEditing.php";
+    $updateBlogQuery = "UPDATE `userblogpost` SET ";
     if(isset($_POST["submit"])) {
         $filename = $_FILES['image']['name'];
         $tempName = $_FILES['image']['tmp_name'];
@@ -30,19 +31,16 @@
             $_POST['categoryName'] = implode("_",$_POST['categoryName']);
         }
         if(isset($_SESSION['updatePost'])) {
-            updateBlogIntoDb($_POST);
+            updateIntoDb($_POST,$updateBlogQuery);
         } else {
             insertBlogIntoDb($_POST);
         }
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "</pre>";
     }
     $arr = [];
     mysqli_select_db($conn,"test");
-    $result = mysqli_query($conn,"SELECT categoryName FROM `categorytable`");
+    $result = mysqli_query($conn,"SELECT categoryName,categoryId FROM `categorytable`");
     while($row = mysqli_fetch_assoc($result)) {
-        array_push($arr,$row['categoryName']);
+        array_push($arr,$row);
     }
 
 ?>
@@ -69,8 +67,8 @@
                 <label>catagory</label>
                 <select name="categoryName[]" multiple>
                     <?php foreach($arr as $key => $value) :?>
-                        <?php $array = !empty(array_intersect(getValue("categoryName",[]),[$value])) ? "SELECTED" : "";?>
-                        <option value="<?php echo $value;?>" <?php echo $array;?>><?php echo $value;?></option>
+                        <?php $array = !empty(array_intersect(getValue("categoryName",[]),[$value['categoryId']])) ? "SELECTED" : "";?>
+                        <option value="<?php echo $value['categoryId'];?>" <?php echo $array;?>><?php echo $value['categoryName'];?></option>
                     <?php endforeach?>
                 </select>
             </div>

@@ -20,7 +20,7 @@ if (isset($_POST['registrationPageSubmit'])) {
     }
 }
 
-function getValue($key,$value,$returntype="") {
+function getValues($key,$value,$returntype="") {
     if (isset($_POST[$key][$value])) {
         if (is_array($_POST[$key][$value])) {
             $temp = [];
@@ -34,6 +34,7 @@ function getValue($key,$value,$returntype="") {
         return isset($_SESSION[$key][$value]) ? $_SESSION[$key][$value] : $returntype;
     }    
 }
+
 function setValue($key,$value) {
     $_SESSION[$key][$value] = isset($_POST[$key][$value]) ? $_POST[$key][$value] : "" ;
 }

@@ -19,7 +19,6 @@
         $bolemail = false;
         if ($row = mysqli_num_rows($user) > 0) {
             foreach ($user as $column => $currentRow) {
-                
                 foreach ($currentRow as $field => $VALUE) {
                     if ($field == "email") {
                         if ($_POST['email'] == $VALUE) {
