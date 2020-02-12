@@ -1,4 +1,5 @@
 <?php
+// this is front controller index
 
 // require '../Core/Router.php';
 
@@ -6,6 +7,9 @@
 
 //echo get_class($router);
 //echo "Requested URL :- ".$_SERVER['QUERY_STRING'];
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+ 
 
 spl_autoload_register(function ($class) {
     $root = dirname(__DIR__);
