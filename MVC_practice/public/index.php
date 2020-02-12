@@ -8,16 +8,16 @@
 //echo get_class($router);
 //echo "Requested URL :- ".$_SERVER['QUERY_STRING'];
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+require '../vendor/autoload.php';
  
 
-spl_autoload_register(function ($class) {
-    $root = dirname(__DIR__);
-    $file = $root. '/' .str_replace('\\', '/', $class) . '.php';
-    if (is_readable($file)) {
-        require $root. '/' .str_replace('\\', '/', $class) . '.php';
-    }
-});
+// spl_autoload_register(function ($class) {
+//     $root = dirname(__DIR__);
+//     $file = $root. '/' .str_replace('\\', '/', $class) . '.php';
+//     if (is_readable($file)) {
+//         require $root. '/' .str_replace('\\', '/', $class) . '.php';
+//     }
+// });
 
 $router = new Core\Router();
 
