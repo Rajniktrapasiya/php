@@ -11,7 +11,7 @@ class Home extends \Core\Controller {
 
     protected function after()
     {
-        //echo "(after)";
+        // echo "(after)";
     }
 
     public function indexAction() {

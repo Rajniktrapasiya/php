@@ -13,12 +13,15 @@ class Router {
 
         $route = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
 
+
         $route = '/^'.$route.'$/i';
 
-        $this->routes[$route] = $params;
         // echo "<pre>";
-        // var_dump($this->routes);
+        // var_dump($route);
         // echo "</pre>";
+        
+        $this->routes[$route] = $params;
+        
     } 
 
     public function getRoutes() {
@@ -34,11 +37,16 @@ class Router {
 
     public function match($url) {
         // $reg_exp = "/^(?P<controller>[a-z-]+)\/(?P<action>[a-z-]+)$/";
-
+        // echo "<pre>";
+        //print_r($this->routes); die;
         foreach ($this->routes as $route => $params) {
+            // echo $route."<br>";
+            // echo $url."<br>";
             if (preg_match($route, $url, $matches)) {
                 // $param = [];
-
+                // echo "<pre>";
+                // print_r($matches);
+                // echo "<br>";
                 foreach ($matches as $key => $match) {
                     if (is_string($key)) {
                         $params[$key] = $match;
@@ -46,6 +54,10 @@ class Router {
                 }
 
                 $this->params = $params;
+                // echo "<pre>";
+                // print_r($params);
+                // echo "</pre>";
+                // die;
                 return true;
             }
         }
@@ -61,12 +73,12 @@ class Router {
 
         // print_r($url);
         // echo "<br>";
-
         if($this->match($url)) {
             $controller = $this->params['controller'];
             $controller = $this->convertToStudlyCaps($controller);
             // $controller = "App\Controllers\\$controller";
             $controller = $this->getNamespace().$controller;
+            // echo $controller;
             // print_r($controller);
 
             if (class_exists($controller)) {
@@ -74,6 +86,7 @@ class Router {
 
                 $action = $this->params['action'];
                 $action = $this->convertToCamelCase($action);
+                // echo "<br>".$action;
 
                 if (is_callable([$controller_object, $action])) {
                     $controller_object->$action();
@@ -98,10 +111,14 @@ class Router {
 
     protected function removeQueryStringVariables($url) {
         if ($url != '') {
+            // echo $url;
             $parts = explode('&', $url, 2);
-
+            // echo "<pre>";
+            // print_r($parts);
+            // echo "</pre>";
             if (strpos($parts[0], '=') === false) {
                 $url = $parts[0];
+                // echo $url;
             } else {
                 $url = '';
             }
