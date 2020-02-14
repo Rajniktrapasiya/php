@@ -17,7 +17,7 @@ abstract class Controller {
         // echo "calling";
         // echo "<pre>";
         // print_r($this);
-        // echo "</pre>";  
+        // echo "</pre>";
         if (method_exists($this, $method)) {
             // echo $method;
             if ($this->before() !== false) {

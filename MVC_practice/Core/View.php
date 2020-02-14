@@ -26,7 +26,7 @@ class View {
         // echo "<pre>";
         // print_r($args);
         // echo "</pre>";
-        echo $twig->render($template, $args);
+        echo $twig->render($template, $args);   
     }
 }
 
