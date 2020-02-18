@@ -16,9 +16,7 @@ class Router {
 
         $route = '/^'.$route.'$/i';
 
-        // echo "<pre>";
-        // var_dump($route);
-        // echo "</pre>";
+        // echo 
         
         $this->routes[$route] = $params;
         
@@ -26,7 +24,7 @@ class Router {
 
     public function getRoutes() {
         return $this->routes;
-    }
+    }   
 
     // foreach ($this->routes as $route => $params) {
     //     if ($url == $route) {
@@ -78,10 +76,10 @@ class Router {
             $controller = $this->convertToStudlyCaps($controller);
             // $controller = "App\Controllers\\$controller";
             $controller = $this->getNamespace().$controller;
-            // echo $controller;
-            // print_r($controller);
-
+            // echo $controller;    
+            
             if (class_exists($controller)) {
+                // print_r($controller);
                 $controller_object = new $controller($this->params);
 
                 $action = $this->params['action'];

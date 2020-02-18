@@ -14,7 +14,7 @@ abstract class Controller {
     public function __call($name, $args)
     {
         $method = $name . 'Action';
-        // echo "calling";
+        // echo "$method<br>";
         // echo "<pre>";
         // print_r($this);
         // echo "</pre>";

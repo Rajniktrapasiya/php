@@ -1,0 +1,72 @@
+{% extends "admin.html" %}
+
+{% block title %}add{% endblock %}
+
+{% block body %}
+
+    <h1>This is ADD Products Page</h1>
+    <form action="{{ action }}" method="POST" enctype="multipart/form-data">
+        <div class="productName">
+            <label>Enter Product Name:-</label>
+            <input type="text" name="product[product_name]" value="{{ get.product_name }}" />
+            <span>{{ error.product_name }}</span>
+        </div>
+        <div class="productSku">
+            <label>Enter Product Sku:-</label>
+            <input type="text" name="product[sku]" value="{{ get.sku }}"/>
+            <span>{{ error.sku }}</span>
+        </div>
+        <div class="productUrlKey">
+            <label>Enter Product Url-Key:-</label>
+            <input type="text" name="product[url_key]" value="{{ get.url_key }}"/>
+            <span>{{ error.url_key }}</span>
+        </div>
+        <div class="productImage">
+            <label>Choose Product Image:-</label>
+            <input type="file" name="image"/>
+            <span>{{ error.product_name }}</span>
+        </div>
+        <div class="productStatus">
+            <label>Enter Product Status:-</label>
+            <select name='product[status]'>
+                <option value="ON">ON</option>
+                <option value="OFF">OFF</option>
+            </select>
+        </div>
+        <div class="productDescription">
+            <label>Enter Product Description:-</label>
+            <input type="text" name="product[description]" value="{{ get.description }}"/>
+            <span>{{ error.description }}</span>
+        </div>
+        <div class="productShortDescription">
+            <label>Enter Product Short Description:-</label>
+            <input type="text" name="product[short_description]" value="{{ get.short_description }}"/>
+            <span>{{ error.short_description }}</span>
+        </div>
+        <div class="productPrice">
+            <label>Enter Product Price:-</label>
+            <input type="number" name="product[price]" value="{{ get.price }}"/>
+            <span>{{ error.price }}</span>
+        </div>
+        <div class="productStok">
+            <label>Enter Product Stok:-</label>
+            <input type="number" name="product[stock]" value="{{ get.stock }}"/>
+            <span>{{ error.stock }}</span>
+        </div>
+        <div class="productCategories">
+            <label>Choose product Categories :-</label>
+            <select name="product[category]">
+                {% for key in categories %}
+                {% if key.categories_id == get.product_categorie %}
+                <option value="{{ key.categories_id }}" SELECTED>{{ key.category_name }}</option>
+                {% else %}
+                <option value="{{ key.categories_id }}">{{ key.category_name }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" name="{{ submit }}" value="AddProducts"/>
+    </form>    
+
+    
+{% endblock %}

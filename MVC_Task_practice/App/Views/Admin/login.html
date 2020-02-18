@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ posts }}Page{% endblock %}
+
+{% block body %}
+
+    <form action="{{ action }}" method="POST">
+        <div class="LoginId">
+            <label>Login :-</label>
+            <input type="text" name="LoginId">
+        </div>
+        <div class="PassWord">
+            <label>PassWord :-</label>
+            <input type="text" name="Password">
+        </div>
+        <input type="submit" name="Submit">
+    </form>
+
+{% endblock %}

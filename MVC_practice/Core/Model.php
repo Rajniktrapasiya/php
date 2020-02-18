@@ -8,6 +8,7 @@ abstract class Model {
     protected static function getDB() {
         static $db = null;
 
+        // echo "main model file<br>";
         if ($db === null) {
             $host = 'localhost';
             $dbname = 'mvc';

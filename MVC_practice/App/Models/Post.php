@@ -11,7 +11,7 @@ class Post extends \Core\Model {
         // $dbname = 'mvc';
         // $username = 'root';
         // $password = '1234';
-
+        // echo "sub model<br>";
         try {
             // $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8",$username, $password);
             $db = static::getDB();

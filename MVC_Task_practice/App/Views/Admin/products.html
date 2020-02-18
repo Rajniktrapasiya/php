@@ -1,0 +1,31 @@
+{% extends "admin.html" %}
+
+{% block title %}products{% endblock %}
+
+{% block body %}
+
+    <h1>This is Products Page</h1>
+    <form action="{{ action }}" method="POST">
+        <table>
+            <tr>
+            {% for key in title %}
+            <th>{{ key }}</th>
+            {% endfor %}
+            </tr>
+        {% for key in result %}
+            <tr>
+            {% for value in key %}
+                <td>{{ value }}</td>
+            {% endfor %}
+                <td>
+                    <a href="{{ action }}/edit/id/{{ key.products_id }}">Update</a> 
+                    <a href="{{ action }}/delete/id/{{ key.products_id }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <input type="submit" name="AddProducts" value="AddProducts"/>
+    </form>    
+
+    
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "admin.html" %}
+
+{% block title %}add Categories{% endblock %}
+
+{% block body %}
+    <h1>Hi THIS IS CMS</h1>
+    <form action="{{ action }}" method="POST">
+    <div class="cmsPageTitle">
+        <label>Page Title</label>
+        <input type="text" name="cms[page_title]" value="{{ get[0].page_title }}">
+    </div>
+    <div class="cmsUrlKey">
+        <label>Enter Url-Key:-</label>
+        <input type="text" name="cms[url_key]" value="{{ get[0].url_key }}">
+    </div>
+    <div class="cmsStatus">
+        <label>Status:-</label>
+        <select name='cms[status]'>
+            <option value="ON">ON</option>
+            <option value="OFF">OFF</option>
+        </select>
+    </div>
+    <div class="cmsContent">
+        <label>Content:-</label>
+        <textarea rows="10" cols="50" name="cms[content]" >{{ get[0].content }}</textarea>
+    </div>
+    <input type="submit" name="{{ submit }}" value="{{ submit }}">
+    </form>
+{% endblock %}

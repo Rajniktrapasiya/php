@@ -1,0 +1,52 @@
+{% extends "admin.html" %}
+
+{% block title %}add Categories{% endblock %}
+
+{% block body %}
+
+    <h1>This is ADD Categories Page</h1>
+    <form action="{{ action }}" method="POST" enctype="multipart/form-data">
+        <div class="categorieName">
+            <label>Enter categorie Name:-</label>
+            <input type="text" name="categorie[category_name]" value="{{ get.category_name }}" />
+            <span>{{ error.category_name }}</span>
+        </div>
+        <div class="categorieUrlKey">
+            <label>Enter categorie Url-Key:-</label>
+            <input type="text" name="categorie[url_key]" value="{{ get.url_key }}"/>
+            <span>{{ error.url_key }}</span>
+        </div>
+        <div class="categorieImage">
+            <label>Choose categorie Image:-</label>
+            <input type="file" name="image" value="C:/xampp/htdocs{{ base_url }}/images/{{ get.image }}"/>
+            <!-- <img src="{{ base_url }}/images/{{ get.image }}"> -->
+        </div>
+        <div class="categorieStatus">
+            <label>Enter categorie Status:-</label>
+            <select name='categorie[status]'>
+                <option value="ON">ON</option>
+                <option value="OFF">OFF</option>
+            </select>
+        </div>
+        <div class="categorieDescription">
+            <label>Enter categorie Description:-</label>
+            <input type="text" name="categorie[description]" value="{{ get.description }}"/>
+            <span>{{ error.description }}</span>
+        </div>
+        <div class="parentCategorie">
+            <label>Choose Parent Category :-</label>
+            <select name="categorie[parent_category]">
+                {% for key in parent %}
+                {% if key.categories_id == get.parent_category %}
+                <option value="{{ key.categories_id }}" SELECTED>{{ key.category_name }}</option>
+                {% else %}
+                <option value="{{ key.categories_id }}">{{ key.category_name }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" name="{{ submit }}" value="{{ submit }}"/>
+    </form>    
+
+    
+{% endblock %}
