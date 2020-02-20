@@ -27,12 +27,16 @@
         {% if key.image == value %}
         <a href="{{ base_url }}/product/view/{{ key.url_key }}">
         <img src="{{ base_url }}/images/{{ value }}" style="width:100%" class="imgCenter" />
+        {% if key.status == "OFF" %} 
+        <div class="productStatus"><span>Comming Soon</span></div>
+        {% endif %}
         </a>
         {% elseif key.product_name == value %}
         <div class="productName">{{ value }}</div>
         {% elseif key.price == value %}
         <div class="productPrice"><i class="fa fa-inr" aria-hidden="true" ></i>{{ value }}</div>
         {% elseif key.url_key == value %}
+        {% elseif key.status == value %}
         {% else %}
         <div class="sortDescription">{{ value }}</div>
         {% endif %}
@@ -71,6 +75,5 @@
 
 <div class="footer">
     <a href="{{ base_url }}/aboutUs"><p>ABOUT-US</p></a>
-    
 </div>
 {% endblock %}

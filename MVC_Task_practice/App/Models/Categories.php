@@ -36,7 +36,7 @@ class CategoryAdd extends \Core\Model {
         $Query = "SELECT `categories_id` FROM `categories` WHERE `url_key`= '$url'";
         $CategorieId = self :: executeQuery($Query);
         // print_r($CategorieId[0]['categories_id']);
-        $selectedProducts = "SELECT `image`,`product_name`, `url_key`, `price`, `short_description` FROM `products` AS P INNER JOIN (SELECT `product_id` FROM `products_categories` WHERE category_id = ".$CategorieId[0]['categories_id'].") As T WHERE T.product_id = P.products_id";
+        $selectedProducts = "SELECT `image`,`product_name`, `url_key`, `price`, `short_description`, `status` FROM `products` AS P INNER JOIN (SELECT `product_id` FROM `products_categories` WHERE category_id = ".$CategorieId[0]['categories_id'].") As T WHERE T.product_id = P.products_id";
         $relatedProducts = self :: executeQuery($selectedProducts);
         // print_r($relatedProducts);
         return $relatedProducts;
