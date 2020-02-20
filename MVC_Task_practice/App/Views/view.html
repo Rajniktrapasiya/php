@@ -1,0 +1,76 @@
+{% extends "Home.html" %}
+
+{% block body %}
+
+<div class="navbar">
+    {% for key in parentCategories %}
+    <div class="dropdown">
+        <button class="dropbtn">{{ key.category_name }} 
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+        {% for subkey in subCategories %}
+            {% if subkey.parent_category == key.categories_id %}
+          <a href="{{ base_url }}/category/view/{{ subkey.url_key }}">{{ subkey.category_name }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="Container">
+<div class="products">
+{% for key in products %}
+<div class="subProducts">
+    {% for value in key %}
+        {% if key.image == value %}
+        <a href="{{ base_url }}/product/view/{{ key.url_key }}">
+        <img src="{{ base_url }}/images/{{ value }}" style="width:100%" class="imgCenter" />
+        </a>
+        {% elseif key.product_name == value %}
+        <div class="productName">{{ value }}</div>
+        {% elseif key.price == value %}
+        <div class="productPrice"><i class="fa fa-inr" aria-hidden="true" ></i>{{ value }}</div>
+        {% elseif key.url_key == value %}
+        {% else %}
+        <div class="sortDescription">{{ value }}</div>
+        {% endif %}
+       {% endfor %}
+</div>
+{% endfor %}
+</div>
+</div>
+
+<div class="productContainer">
+    {% for key in product %}
+    {% for value in key %}
+    {% if key.image == value %}
+        <div class="productImage"><img src="{{ base_url }}/images/{{ value }}" style="width:100%; height: 100%;" class="imgCenter" /></div>
+        <div class="ProductDetail">
+    {% elseif key.product_name == value %}
+        <div class="product_Name">{{ value }}</div>
+    {% elseif key.short_description == value %}
+    <div class="productSortDescription">{{ value }}</div>
+    {% elseif key.description == value %}
+    <div class="productDecription"><label>description:</label>{{ value }}</div>
+    {% elseif key.sku == value %}
+    <div class="productSku"><label>ProductSku:- </label>{{ value }}</div>
+    {% elseif key.price == value %}
+    <div class="productPrice" style="text-align: left; margin-top: 30px; margin-right: 30px;"><i class="fa fa-inr" aria-hidden="true" ></i>{{ value }}</div>
+    {% elseif key.stock == value %}
+    <div class="ProductStok"><label>Stoke Left :- </label>{{ value }}</div>
+    {% else %}
+
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>
+</div>
+
+
+<div class="footer">
+    <a href="{{ base_url }}/aboutUs"><p>ABOUT-US</p></a>
+    
+</div>
+{% endblock %}

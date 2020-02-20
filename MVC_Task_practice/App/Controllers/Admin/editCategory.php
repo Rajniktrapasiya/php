@@ -94,6 +94,9 @@ class Categories extends \Core\Controller {
         if(isset($_POST['updateCategorieItem'])) {
             if ($check[0]) {
                 $this->image();
+                if (isset($_POST['categorie']['image']) && $_POST['categorie']['image'] == "") {
+                    unset($_POST['categorie']['image']);
+                }
                 CategoryAdd ::updateCategories($params);
                 header("Location:http://localhost/cybercom/php/MVC_Task_practice/admin/categories");
             } else {

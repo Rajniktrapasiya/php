@@ -27,7 +27,8 @@ class Products extends \Core\Controller {
         }
 
         if ($bol) {
-        $productCategories = ProductAdd :: getCategorieForProduct($productCategories);
+        $productCategories = ProductAdd :: getCategorieForProduct();
+        // print_r($productCategories);
         isset($_POST['AddProducts']) ? $action = 'products/add' : $action = 'add' ; 
         View :: renderTemplate("Admin/products/add.html",[
             'submit' => 'AddProductItem',
@@ -98,6 +99,9 @@ class Products extends \Core\Controller {
                 $this ->image();
                 $productCategorie = $_POST['product']['category'];
                 unset($_POST['product']['category']);
+                if (isset($_POST['product']['image']) && $_POST['product']['image'] == "") {
+                    unset($_POST['product']['image']);
+                }
                 ProductAdd :: updateProducts($params,$productCategorie);
                 header("Location:http://localhost/cybercom/php/MVC_Task_practice/admin/products");
             } else {

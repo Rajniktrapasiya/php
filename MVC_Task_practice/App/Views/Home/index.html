@@ -4,12 +4,22 @@
 
 {% block body %}
 
-    <h1>Welcome</h1>
-    <p>Hello from a Twig template, {{ name }}!</p>
+<div class="navbar">
+    {% for key in parentCategories %}
+    <div class="dropdown">
+        <button class="dropbtn">{{ key.category_name }} 
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+        {% for subkey in subCategories %}
+            {% if subkey.parent_category == key.categories_id %}
+          <a href="category/view/{{ subkey.url_key }}">{{ subkey.category_name }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        </div>
+    {% endfor %}
+</div>
 
-    <ul>
-        {% for colour in colours %}
-            <li>{{ colour }}</li>
-        {% endfor %}
-    </ul>
 {% endblock %}
+

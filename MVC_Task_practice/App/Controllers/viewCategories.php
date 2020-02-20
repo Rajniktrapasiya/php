@@ -5,24 +5,21 @@ namespace App\Controllers;
 use App\Models\CategoryAdd;
 use Core\View;
 
-class Home extends \Core\Controller {
+class Category extends \Core\Controller{
 
-    public function HomeAction() {
-        
+    public function viewAction($params = []) {
         $parentCategories = CategoryAdd :: getOnlyParentCategories();
         $subCategories = CategoryAdd :: getSubCategories();
-        // echo "<pre>";
-        // print_r($subCategories);
-        // echo "</pre>";
-        View ::renderTemplate('Home/index.html', [
+        $getProducts = CategoryAdd :: findCategorieIdFromUrl($params['url']);
+        // echo $params['url'];
+        View ::renderTemplate('view.html', [
             'parentCategories' => $parentCategories,
             'subCategories' => $subCategories,
+            'products' => $getProducts,
             'name' => 'Rajnik',
             'colours' => ['red','green', 'blue'] ,
             'base_url' => dirname($_SERVER['SCRIPT_NAME'])
         ]);
-        // echo "<h1>HOME</h1>";
-
     }
 }
 

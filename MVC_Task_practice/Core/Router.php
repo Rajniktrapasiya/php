@@ -4,6 +4,9 @@ namespace Core;
 
 // require_once "../App/Controllers/Home.php";
 include_once "App/Controllers/Admin/edit.php";
+include_once "App/Controllers/viewCategories.php";
+include_once "App/Controllers/viewProduct.php";
+include_once "App/Controllers/viewAboutUs.php";
 include_once "App/Controllers/Admin/editCategory.php";
 include_once "App/Controllers/Admin/Cms/editCms.php";
 include_once "App/Models/Categories.php";

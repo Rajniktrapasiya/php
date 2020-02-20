@@ -28,6 +28,12 @@ class ProductAdd extends \Core\Model {
         }
     }
 
+    public function findProductDetailFromUrl($url) {
+        $SelectQuery = "SELECT `image`,`product_name`, `short_description`, `description` , `sku`, `price`, `stock` FROM `products` WHERE url_key = '".$url."'";
+        $product = self::getAll($SelectQuery);
+        return $product;
+    }
+
     public function insertIntoProduct($postData,$productCategorie) {
         $inserQuery = "INSERT INTO `products`(`product_name`, `sku`, `url_key`, `status`, `description`, `short_description`, `price`, `stock`,`image`) VALUES (";
         foreach ($postData as $key => $value) {
@@ -42,7 +48,7 @@ class ProductAdd extends \Core\Model {
     } 
     
     public function getCategorieForProduct() {
-        $productCategories = "SELECT `categories_id`, `category_name` FROM `categories`";
+        $productCategories = "SELECT `categories_id`, `category_name` FROM `categories` WHERE parent_category != 0";
         $productCategories = self :: getAll($productCategories);
         return $productCategories;
     }

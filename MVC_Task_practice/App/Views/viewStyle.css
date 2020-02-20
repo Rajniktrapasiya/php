@@ -1,0 +1,174 @@
+body {
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+overflow: hidden;
+background-color: #333;
+}
+
+.navbar a {
+float: left;
+font-size: 16px;
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+
+.dropdown {
+float: left;
+overflow: hidden;
+}
+
+.dropdown .dropbtn {
+font-size: 16px;  
+border: none;
+outline: none;
+color: white;
+padding: 14px 16px;
+background-color: inherit;
+font-family: inherit;
+margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+background-color: #4CAF50;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f9f9f9;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+}
+
+.dropdown-content a {
+float: none;
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+text-align: left;
+}
+
+.dropdown-content a:hover {
+background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+.Container{
+padding: 10px;
+/* background-color: #4CAF50; */
+}
+
+.products {
+/* background-color: cadetblue; */
+margin: 10px;
+display: flex;
+
+}
+
+.subProducts {
+display: block;
+margin:  5px;
+width: 12%;
+box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+border-width: thin;
+/* padding-left: 5px;
+padding-right: 5px; */
+/* background-color: #ddd; */
+/* padding-right: 11px; */
+}
+
+
+div {
+display: block;
+}
+.imgCenter{
+align-items: center;
+display: block;
+/* margin-left: auto;
+margin-right: auto; */
+width: 160px; 
+height: 212px;
+}
+
+.productName {
+font-family: Roboto,-apple-system,BlinkMacSystemFont,Helvetica Neue,Segoe UI,sans-serif; 
+text-align: center;
+}
+
+element.style {
+width: 25%;
+}
+
+.productPrice {
+    font-weight: bold;
+    text-align: center;
+    font-size: 40px;
+}
+
+.sortDescription {
+    font-family: Roboto,Arial,sans-serif;
+}
+
+.productImage {
+    width: 30%;
+    height: 60%;
+    flex-flow :column;
+}
+.ProductDetail {
+    width: 70%;
+    height: 60%;
+    /* background-color: aquamarine; */
+    flex-flow :column;
+}
+
+.productContainer {
+    flex-flow: row;
+    display: flex;
+}
+
+.product_Name {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: "Arial, sans-serif";
+    font-stretch: normal
+}
+
+.productSortDescription {
+    font-family: "Didot, serif";
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.productDecription {
+    font-family: "Bookman, URW Bookman L, serif";
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.productSku {
+    font-family: "Courier, monospace";
+    font-size: 30px;
+    font-weight: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.ProductStok {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

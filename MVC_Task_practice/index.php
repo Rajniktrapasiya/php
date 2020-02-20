@@ -16,7 +16,10 @@ $routes = new Core\Router();
 
 $routes -> add("",['controller'=> 'Home','action'=> 'Home']);
 $routes -> add("{controller}",['action'=> 'Home']);
+$routes -> add("aboutUs/",['controller'=>'aboutUs']);
 $routes -> add("{controller}/{action}");
+$routes -> add("category/{action}/{url:\w+}",['controller'=>'category']);
+$routes -> add("product/{action}/{url:\w+}",['controller'=>'product']);
 $routes -> add("admin/{controller}/{action}",['namespace' => 'Admin']);
 $routes -> add('admin/{controller}/{action}/{id}/{value:\d+}',['namespace' => 'Admin']);
 $routes -> add("admin/cms/{controller}/{action}",['namespace' => 'Admin\Cms']);
