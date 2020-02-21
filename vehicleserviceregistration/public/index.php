@@ -27,7 +27,7 @@ $router = new Core\Router();
 $router -> add('',['controller'=> "login","action"=> "view"]);
 $router -> add('{controller}/{action}');
 $router -> add('{controller}/{id:\d+}/{action}');
-$router -> add('admin/{controller}/{action}', ['namespace' => 'Admin']);
+$router -> add('{controller}', ["action"=> "index"]);
 
 // echo "<pre>";
 // print_r($router);

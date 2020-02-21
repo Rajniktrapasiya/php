@@ -51,6 +51,26 @@ class Validation {
         }
     }
 
+    public function vehicleRegistration($post) {
+        $vehicleDetail = UserRegistration :: getVehicleDetail();
+        // echo "<pre>";
+        // print_r($vehicleDetail);
+        // echo "</pre>";
+
+        foreach ($vehicleDetail as $key => $value) {
+            if ($post['service']['vehicleNumber'] = $value['vehicleNumber']) {
+                if ($post['service']['userLicenceNumber'] = $value['userLicenceNumber']) {
+                    if ($value['user_id'] != $_SESSION['userId']) {
+                        $vehicleError = "Please Choose Other Number It's Assign";
+                        return $vehicleError;
+                        break;
+                    }
+                }
+            }
+        }
+        return $vehicleError = "";
+    }
+
     public function serviceRegistration($post) {
         
         $timeSlot = UserRegistration :: getTimeSlotDetail();

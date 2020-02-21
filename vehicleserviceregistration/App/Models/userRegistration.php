@@ -30,6 +30,27 @@ class UserRegistration extends \Core\Model {
         }
     }
 
+    public function updateDataFromAdmin($post) {
+        foreach ($post as $key => $value) {
+            $serviceInsert = "UPDATE `service_registrations` SET `status` = 'accept' WHERE `service_id` =";
+            $serviceInsert .= $value;
+            self:: insertDb($serviceInsert);
+        }
+        return true;
+    }
+
+    public function getAllAdminData() {
+        $Query = "SELECT * FROM `service_registrations`";
+        $result = self :: getData($Query);
+        return $result;
+    }
+
+    public function getVehicleDetail() {
+        $Query = "SELECT  `user_id`,`vehicleNumber`, `userLicenceNumber` FROM `service_registrations`";
+        $result = self :: getData($Query);
+        return $result;
+    }
+
     public function getUserService() {
         $Query = "SELECT  `title`, `vehicleNumber`, `userLicenceNumber`, `Date`, `timeSlot`, `VehicleIssue`, `center`, `status` FROM `service_registrations` WHERE `user_id` = ".$_SESSION['userId'];
         $result = self :: getData($Query);

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}admin{% endblock %}
+
+{% block body %}
+    <h1>Hello Admin</h1>
+<form action="{{ base_url }}/admin/update" method="POST">
+    <table>
+        {% for key in data %}
+            
+        <tr>
+            <td><input type="checkbox" name="{{ key.service_id }}" value ="{{ key.service_id }}"></td>
+            <td>{{ key.service_id }}</td>
+            <td>{{ key.user_id }}</td>
+            <td>{{ key.	title }}</td>
+            <td>{{ key.vehicleNumber }}</td>
+            <td>{{ key.userLicenceNumber }}</td>
+            <td>{{ key.Date }}</td>
+            <td>{{ key.VehicleIssue }}</td>
+            <td>{{ key.center }}</td>
+            <td>{{ key.status }}</td>
+            <td>{{ key.created_At }}</td>
+        </tr>
+        
+        {% endfor %}
+        </table>
+        <input type="submit" value="submit">
+    </form>
+{% endblock %}

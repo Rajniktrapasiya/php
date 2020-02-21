@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+include_once "../App/Controllers/Admin/Users.php";
+
 class Router {
     protected $routes = [];
 

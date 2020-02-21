@@ -16,8 +16,9 @@ class User extends \Core\Controller {
     public function checkAction() {
         $check = Validation :: userValidation($_POST);
         $timeSlotError = Validation :: serviceRegistration($_POST);
+        $VehicleError = Validation :: vehicleRegistration($_POST);
 
-        if ($check[0] && $timeSlotError == "") {
+        if ($check[0] && $timeSlotError == "" && $VehicleError == "") {
 
             UserRegistration :: insertServiceIntoDb($_POST);
             
@@ -31,6 +32,7 @@ class User extends \Core\Controller {
         } else {
             View::renderTemplate('add.html', [
                 'error' => $check[1],
+                'vehicleNumber' => $VehicleError,
                 'timeSlot' => $timeSlotError,
                 'base_url' => dirname($_SERVER['SCRIPT_NAME'])
             ]);  
