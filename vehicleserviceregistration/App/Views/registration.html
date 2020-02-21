@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Registration-Page{% endblock %}
+
+{% block body %}
+    <h1>Registration-Page</h1>
+
+    <form action="registration" method="POST">
+        <div class="userFirstname">
+            <label>FirstName:-</label>
+            <input type="text" name="user[firstName]">
+            <span>{{ error.firstName }}</span>
+        </div>
+        <div class="userLastName">
+            <label>LastName:-</label>
+            <input type="text" name="user[lastName]">
+            <span>{{ error.lastName }}</span>
+        </div>
+        <div class="userEmail">
+            <label>Email:-</label>
+            <input type="email" name="user[email]">
+            <span>{{ error.email }}</span>
+        </div>
+        <div class="userPassWord">
+            <label>PassWord:-</label>
+            <input type="password" name="user[password]">
+            <span>{{ error.password }}</span>
+        </div>
+        <div class="userPhoneNumber">
+            <label>PhoneNumber:-</label>
+            <input type="number" name="user[phoneNumber]">
+            <span>{{ error.phoneNumber }}</span>
+        </div>
+        <div class="userAddress">
+            <label>EnterAddress:-</label>
+            <textarea name="userAddress[street]"></textarea>
+            <span>{{ error.street }}</span>
+        </div>
+        <div class="userAddressCity">
+            <label>Enter City:-</label>
+            <input type="text" name="userAddress[city]">
+            <span>{{ error.city }}</span>
+        </div>
+        <div class="userAddressState">
+            <label>Enter State:-</label>
+            <input type="text" name="userAddress[state]">
+            <span>{{ error.state }}</span>
+        </div>
+        <div class="userAddressZipCode">
+            <label>Enter ZIPCODE:-</label>
+            <input type="text" name="userAddress[zipCode]">
+            <span>{{ error.zipCode }}</span>
+        </div>
+        <div class="userAddress">
+            <label>select Country:-</label>
+            <select name="userAddress[country]">
+                <option value="India">India</option>
+                <option value="Us">Us</option>
+                <option value="Canada">Canada</option>
+            </select>
+        </div>
+        <input type="submit" value="submit">
+    </form>
+{% endblock %}

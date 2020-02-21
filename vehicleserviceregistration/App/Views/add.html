@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}add-Page{% endblock %}
+
+{% block body %}
+
+<h1>Service - Registration</h1>
+
+<form action="check" method="POST">
+    <div class="serviceTitle">
+        <label>Title</label>
+        <input type="text" name="service[title]">
+        <span>{{ error.title }}</span>
+    </div>
+    <div class="serviceVehicleNumber">
+        <label>Vehicle Number :-</label>
+        <input type="text" name="service[vehicleNumber]">
+        <span>{{ error.vehicleNumber }}</span>
+    </div>
+    <div class="serviceUserLicenceNumber">
+        <label>UserLicenceNumber :-</label>
+        <input type="text" name="service[userLicenceNumber]">
+        <span>{{ error.userLicenceNumber }}</span>
+    </div>
+    <div class="serviceDate">
+        <label>Date</label>
+        <input type="date" name="service[Date]">
+        <span>{{ error.Date }}</span>
+    </div>
+    <div class="serviceTimeSlot">
+        <label>TimeSlot</label>
+        <select name="service[timeSlot]">
+            <option value="9-10">9-10</option>
+            <option value="10-11">10-11</option>
+            <option value="11-12">11-12</option>
+            <option value="12-1">12-1</option>
+            <option value="1-2">1-2</option>
+            <option value="2-3">2-3</option>
+            <option value="3-4">3-4</option>
+            <option value="4-5">4-5</option>
+            <option value="5-6">5-6</option>
+            <option value="6-7">6-7</option>
+            <option value="7-8">7-8</option>
+            <option value="8-9">8-9</option>
+        </select>
+        <span>{{ timeSlot }}</span>
+    </div>
+    <div class="serviceVehicleIssue">
+        <label>Vehicle Issue</label>
+        <textarea name="service[VehicleIssue]"></textarea>
+        <span>{{ error.VehicleIssue }}</span>
+    </div>
+    <div class="serviceCenter">
+        <label>Service Center</label>
+        <select name="service[center]"> 
+            <option value="Ahemdabad">Ahemdabad</option>
+            <option value="Rajkot">Rajkot</option>
+            <option value="Surat">Surat</option>
+            <option value="Vadodara">Vadodara</option>
+        </select>
+    </div>
+    <input type="submit" value="submit">
+</form>
+
+{% endblock %}

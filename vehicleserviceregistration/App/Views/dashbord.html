@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}DashBord-Page{% endblock %}
+
+{% block body %}
+
+<h1>Hello User</h1>
+
+<a href="{{ base_url }}/user/add">Add-Vehicle</a>
+
+<table>
+{% for key in userData %}
+    
+<tr>
+    <td>{{ key.title }}</td>
+    <td>{{ key.vehicleNumber }}</td>
+    <td>{{ key.userLicenceNumber }}</td>
+    <td>{{ key.Date }}</td>
+    <td>{{ key.timeSlot }}</td>
+    <td>{{ key.center }}</td>
+    <td>{{ key.status }}</td>
+</tr>
+
+{% endfor %}
+</table>
+{% endblock %}
