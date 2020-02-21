@@ -5,6 +5,8 @@ use Core\Model;
 use PDO;
 use PDOException;
 
+// include_once "Core/Model.php";
+
 class CategoryAdd extends \Core\Model {
     public function dataBase($Query) {
         $db = self::getDB();

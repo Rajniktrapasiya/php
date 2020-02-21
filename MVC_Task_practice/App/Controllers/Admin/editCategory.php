@@ -9,6 +9,14 @@ use App\Models\CategoryAdd;
 use App\Controllers\Admin\Validation;
 
 class Categories extends \Core\Controller {
+    public function urlAction() {
+        $parentCategories = CategoryAdd :: getOnlyParentCategories();
+        $subCategories = CategoryAdd :: getSubCategories();
+        $result = [$parentCategories,$subCategories];
+        echo json_encode($result);
+         
+    }
+
     public function addAction($params=[]) {
         // echo "-------------------";
         $bol = true;

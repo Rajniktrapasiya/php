@@ -216,11 +216,70 @@
         }
         </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            $.ajax({
+                url: 'http://localhost/cybercom/php/MVC_Task_practice/admin/categories/url',
+                method: "POST",
+                data : { text : "value" }
+            }).done(function (data) {
+                // alert(data);
+                printNav(data);
+            });
+            
+
+        </script>
+
+
 </head>
 <body>
+
+    <script>
+        function printNav(data) {
+            data = JSON.parse(data);
+            // data.forEach(element => {
+            //     // document.getElementById("demo").innerHTML += element + "<br>";
+            //     // element.forEach(ele => {
+            //     //     console.log(ele);
+            //     // });
+
+            //     console.log(element);
+            // });
+            console.log(data[0]);
+            // data.forEach(myFunction);
+
+            // function myFunction(item, index) {
+            // document.getElementById("demo").innerHTML += index + ":" + item + "<br>"; 
+            // }
+            // console.log(data);
+        }
+    </script>
+<!-- 
+    <div class="navbar">
+        {% for key in parentCategories %}
+        <div class="dropdown">
+            <button class="dropbtn">{{ key.category_name }} 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+            {% for subkey in subCategories %}
+                {% if subkey.parent_category == key.categories_id %}
+              <a href="{{ base_url }}/category/view/{{ subkey.url_key }}">{{ subkey.category_name }}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+            </div>
+        {% endfor %}
+    </div> -->
+
+<div class="demo"></div>
     
+
     {% block body %}
     {% endblock %}
+
+    <div class="" id="div1"></div>
+    
     
 </body>
 </html>
